@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webapl
+spec:
+  containers:
+  - name: webapl
+    image: cibomatto/webapl:0.1
+    livenessProbe:
+      httpGet:
+        path: /healthz
+        port: 3000
+      periodSeconds: 5 # チェック間隔
+      initialDelaySeconds: 5 # 初回起動から探索開始までの猶予
+    readinessProbe:
+      httpGet:
+        path: /ready
+        port: 3000
+      initialDelaySeconds: 15
+      periodSeconds: 6
+      
