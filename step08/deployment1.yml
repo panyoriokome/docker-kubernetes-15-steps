@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deploy
+spec:
+  replicas: 3 # Podを起動する数
+  selector:
+    matchLabels: # コントローラとPodを対応づけるラベルを設定
+      app: web
+  template:
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+    metadata:
+      labels:
+        app: web
+    
